@@ -65,23 +65,28 @@ const appJs = require('./views/app_js');
 const adminJs = require('./views/admin_js');
 
 app.get('/', (req, res) => {
-  res.type('html').send(indexHtml);
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(indexHtml);
 });
 
 app.get('/admin', (req, res) => {
-  res.type('html').send(adminHtml);
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(adminHtml);
 });
 
 app.get('/css/style.css', (req, res) => {
-  res.type('css').send(styleCss);
+  res.setHeader('Content-Type', 'text/css; charset=utf-8');
+  res.send(styleCss);
 });
 
 app.get('/js/app.js', (req, res) => {
-  res.type('js').send(appJs);
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(appJs);
 });
 
 app.get('/js/admin.js', (req, res) => {
-  res.type('js').send(adminJs);
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(adminJs);
 });
 
 app.use(express.static('public'));

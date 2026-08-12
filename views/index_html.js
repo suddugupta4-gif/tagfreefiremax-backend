@@ -1,4 +1,50 @@
-// Auto-generated: raw content of public/index.html, embedded as a JS string so it
-// ships reliably inside the serverless function bundle on Vercel (require()
-// calls are traced correctly; files only read via fs at runtime are not).
-module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>TAGFREEFIREMAX</title>\n<link rel=\"stylesheet\" href=\"/css/style.css\">\n</head>\n<body>\n\n<div class=\"page\">\n  <div class=\"brand\">\n    <div class=\"mark\">TAGFREEFIREMAX</div>\n    <div class=\"sub\">Squad Stats &amp; Tournament Tracker</div>\n  </div>\n\n  <!-- Player cards -->\n  <div class=\"players-row\" id=\"playersRow\"></div>\n\n  <!-- Official / Unofficial toggle -->\n  <div class=\"section-title\">Latest Tournament</div>\n  <div class=\"type-toggle\">\n    <button id=\"btnOfficial\" class=\"active\">Official</button>\n    <button id=\"btnUnofficial\">Unofficial</button>\n  </div>\n\n  <div id=\"tournamentArea\"><!-- filled by app.js --></div>\n\n  <div class=\"section-title\">Overall Analysis</div>\n  <div id=\"overallArea\" class=\"glass\"></div>\n\n  <div class=\"section-title\">Map Analysis</div>\n  <div id=\"mapArea\" class=\"glass\"></div>\n\n  <button class=\"past-btn\" id=\"pastBtn\">📜 Past Tournaments</button>\n\n  <a class=\"admin-link\" href=\"/admin.html\">Admin Panel →</a>\n</div>\n\n<!-- Past tournaments modal -->\n<div class=\"modal-backdrop\" id=\"pastModal\">\n  <div class=\"modal-box glass\">\n    <span class=\"close-x\" id=\"closePast\">✕</span>\n    <h3 style=\"font-family:'Orbitron'; color:var(--gold); margin-bottom:10px;\">Past Tournaments</h3>\n    <div id=\"pastList\"></div>\n  </div>\n</div>\n\n<div class=\"toast\" id=\"toast\"></div>\n\n<script src=\"/js/app.js\"></script>\n</body>\n</html>\n";
+module.exports = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAGFREEFIREMAX - Squad Stats & Tournament Tracker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="page">
+    <div class="brand">
+      <div class="mark">TAGFREEFIREMAX</div>
+      <div class="sub">Squad Stats & Tournament Tracker</div>
+    </div>
+
+    <div class="section-title">Squad Roster</div>
+    <div class="players-row" id="playersRow"></div>
+
+    <div class="section-title">Latest Tournament</div>
+    <div class="type-toggle">
+      <button id="btnOfficial" class="active">Official</button>
+      <button id="btnUnofficial">Unofficial</button>
+    </div>
+
+    <div id="tournamentArea"></div>
+
+    <div class="section-title">Overall Analysis</div>
+    <div id="overallArea" class="glass"></div>
+
+    <div class="section-title">Map Analysis</div>
+    <div id="mapArea" class="glass"></div>
+
+    <button id="pastBtn" class="past-btn">📜 Past Tournaments</button>
+    <a href="/admin" class="admin-link">Admin Panel →</a>
+  </div>
+
+  <!-- Past Tournaments Modal -->
+  <div id="pastModal" class="modal-backdrop">
+    <div class="modal-box glass">
+      <span id="closePast" class="close-x">&times;</span>
+      <h3 style="color:var(--gold); margin-bottom:14px; font-size:16px;">Past Tournaments</h3>
+      <div id="pastList"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>`;

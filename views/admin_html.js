@@ -1,4 +1,154 @@
-// Auto-generated: raw content of public/admin.html, embedded as a JS string so it
-// ships reliably inside the serverless function bundle on Vercel (require()
-// calls are traced correctly; files only read via fs at runtime are not).
-module.exports = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>TAGFREEFIREMAX · Admin</title>\n<link rel=\"stylesheet\" href=\"/css/style.css\">\n</head>\n<body>\n\n<div class=\"page\" style=\"max-width:600px;\">\n  <div class=\"brand\">\n    <div class=\"mark\">TAGFREEFIREMAX</div>\n    <div class=\"sub\">Admin Panel</div>\n  </div>\n\n  <!-- Login gate -->\n  <div id=\"loginBox\" class=\"glass admin-card\">\n    <h3>Admin Login</h3>\n    <label>Password</label>\n    <input type=\"password\" id=\"loginPw\" placeholder=\"Enter admin password\">\n    <button class=\"btn\" id=\"loginBtn\">Unlock</button>\n  </div>\n\n  <!-- Everything below is hidden until unlocked -->\n  <div id=\"adminBody\" style=\"display:none;\">\n\n    <div style=\"text-align:right; margin-bottom:-6px;\">\n      <button class=\"btn secondary\" id=\"logoutBtn\" style=\"margin-top:0; padding:6px 12px; font-size:10px;\">Logout</button>\n    </div>\n\n    <div class=\"glass admin-card\">\n      <h3>Background Images</h3>\n      <label>Site Background</label>\n      <input type=\"file\" id=\"bgFile\" accept=\"image/*\">\n      <button class=\"btn secondary\" id=\"saveBg\">Save Site Background</button>\n      <label style=\"margin-top:16px;\">Scoreboard / Match Card Background</label>\n      <input type=\"file\" id=\"scoreboardFile\" accept=\"image/*\">\n      <button class=\"btn secondary\" id=\"saveScoreboard\">Save Scoreboard Background</button>\n      <div class=\"hint\">Images are compressed in your browser before upload so the site stays fast.</div>\n    </div>\n\n    <div class=\"glass admin-card\">\n      <h3>Players</h3>\n      <div id=\"playerList\"></div>\n      <label style=\"margin-top:14px;\">Player Name</label>\n      <select id=\"playerSelect\"></select>\n      <label>Photo</label>\n      <input type=\"file\" id=\"playerPhoto\" accept=\"image/*\">\n      <button class=\"btn\" id=\"savePlayer\">Save Player Photo</button>\n    </div>\n\n    <div class=\"glass admin-card\">\n      <h3>Create / Replace Tournament</h3>\n      <div class=\"hint\">Creating a new one auto-moves the current \"latest\" of that type into Past Tournaments.</div>\n      <label>Type</label>\n      <select id=\"tType\">\n        <option value=\"official\">Official</option>\n        <option value=\"unofficial\">Unofficial</option>\n      </select>\n      <label>Tournament Name</label>\n      <input type=\"text\" id=\"tName\" placeholder=\"e.g. India Cup Fall 2026\">\n      <label>YouTube Live / VOD Link</label>\n      <input type=\"text\" id=\"tYt\" placeholder=\"https://youtube.com/...\">\n      <button class=\"btn\" id=\"createTournament\">Create as Latest</button>\n    </div>\n\n    <div class=\"glass admin-card\">\n      <h3>Add Match Result</h3>\n      <label>Tournament Type</label>\n      <select id=\"mType\">\n        <option value=\"official\">Official</option>\n        <option value=\"unofficial\">Unofficial</option>\n      </select>\n      <div class=\"hint\" id=\"mTournamentLabel\">Loading latest tournament…</div>\n\n      <label>Player</label>\n      <select id=\"mPlayer\"></select>\n\n      <div class=\"grid2\">\n        <div>\n          <label>Match #</label>\n          <select id=\"mNumber\">\n            <option>1</option><option>2</option><option>3</option>\n            <option>4</option><option>5</option><option>6</option>\n          </select>\n        </div>\n        <div>\n          <label>Map</label>\n          <select id=\"mMap\">\n            <option>Bermuda</option>\n            <option>Purgatory</option>\n            <option>Kalahari</option>\n            <option>Alpine</option>\n            <option>NeXTerra</option>\n            <option>Solara</option>\n          </select>\n        </div>\n      </div>\n\n      <div class=\"grid3\">\n        <div>\n          <label>Kills</label>\n          <input type=\"number\" id=\"mKills\" value=\"0\">\n        </div>\n        <div>\n          <label>Position</label>\n          <input type=\"number\" id=\"mPosition\" value=\"1\">\n        </div>\n        <div>\n          <label>Kill Point Value</label>\n          <input type=\"number\" id=\"mKillPointValue\" value=\"1\">\n        </div>\n      </div>\n      <label>Position Points</label>\n      <input type=\"number\" id=\"mPositionPoints\" value=\"0\">\n      <div class=\"hint\">Total = Position Points + (Kills × Kill Point Value) = <span id=\"totalPreview\">0</span> pts</div>\n\n      <button class=\"btn\" id=\"saveMatch\">Save Match Result</button>\n    </div>\n\n  </div>\n</div>\n\n<div class=\"toast\" id=\"toast\"></div>\n\n<script src=\"/js/admin.js\"></script>\n</body>\n</html>\n";
+module.exports = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAGFREEFIREMAX - Admin Panel</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="page">
+    <div class="brand">
+      <div class="mark">TAGFREEFIREMAX</div>
+      <div class="sub">Admin Control Panel</div>
+    </div>
+
+    <!-- Login Box -->
+    <div id="loginBox" class="glass admin-card" style="max-width:400px; margin:40px auto;">
+      <h3>Admin Authentication</h3>
+      <label>Password</label>
+      <input type="password" id="loginPw" placeholder="Enter admin password">
+      <button id="loginBtn" class="btn">Login</button>
+    </div>
+
+    <!-- Admin Body -->
+    <div id="adminBody" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h2 style="font-size:16px; color:var(--gold);">Control Dashboard</h2>
+        <button id="logoutBtn" class="btn secondary">Logout</button>
+      </div>
+
+      <!-- Background Settings -->
+      <div class="glass admin-card">
+        <h3>Custom Backgrounds</h3>
+        <div class="grid2">
+          <div>
+            <label>Main Background Image</label>
+            <input type="file" id="bgFile" accept="image/*">
+            <button id="saveBg" class="btn">Upload Background</button>
+          </div>
+          <div>
+            <label>Scoreboard Banner</label>
+            <input type="file" id="scoreboardFile" accept="image/*">
+            <button id="saveScoreboard" class="btn">Upload Banner</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Player Management -->
+      <div class="glass admin-card">
+        <h3>Player Management</h3>
+        <div id="playerList" style="margin-bottom:14px;"></div>
+        <div class="grid2">
+          <div>
+            <label>Select Player</label>
+            <select id="playerSelect"></select>
+          </div>
+          <div>
+            <label>Update Photo</label>
+            <input type="file" id="playerPhoto" accept="image/*">
+          </div>
+        </div>
+        <button id="savePlayer" class="btn">Save Player Photo</button>
+      </div>
+
+      <!-- Tournament Management -->
+      <div class="glass admin-card">
+        <h3>Create New Tournament</h3>
+        <div class="grid2">
+          <div>
+            <label>Tournament Type</label>
+            <select id="tType">
+              <option value="official">Official</option>
+              <option value="unofficial">Unofficial</option>
+            </select>
+          </div>
+          <div>
+            <label>Tournament Name</label>
+            <input type="text" id="tName" placeholder="e.g. FFWS 2026 Finals">
+          </div>
+        </div>
+        <label>YouTube Stream / VOD Link (Optional)</label>
+        <input type="url" id="tYt" placeholder="https://youtube.com/watch?v=...">
+        <button id="createTournament" class="btn">Create Tournament</button>
+      </div>
+
+      <!-- Match Results Entry -->
+      <div class="glass admin-card">
+        <h3>Add Match Result</h3>
+        <div id="mTournamentLabel" class="hint" style="color:var(--gold); margin-bottom:10px;"></div>
+        <div class="grid2">
+          <div>
+            <label>Type</label>
+            <select id="mType">
+              <option value="official">Official</option>
+              <option value="unofficial">Unofficial</option>
+            </select>
+          </div>
+          <div>
+            <label>Match #</label>
+            <input type="number" id="mNumber" value="1" min="1">
+          </div>
+        </div>
+        <div class="grid2">
+          <div>
+            <label>Map Name</label>
+            <select id="mMap">
+              <option value="Bermuda">Bermuda</option>
+              <option value="Kalahari">Kalahari</option>
+              <option value="Purgatory">Purgatory</option>
+              <option value="Alpine">Alpine</option>
+              <option value="NeXTTERRA">NeXTTERRA</option>
+            </select>
+          </div>
+          <div>
+            <label>Player</label>
+            <select id="mPlayer"></select>
+          </div>
+        </div>
+        <div class="grid3">
+          <div>
+            <label>Kills</label>
+            <input type="number" id="mKills" value="0" min="0">
+          </div>
+          <div>
+            <label>Position</label>
+            <input type="number" id="mPosition" value="1" min="1">
+          </div>
+          <div>
+            <label>Kill Pts Multiplier</label>
+            <input type="number" id="mKillPointValue" value="1" min="0">
+          </div>
+        </div>
+        <div class="grid2">
+          <div>
+            <label>Position Points</label>
+            <input type="number" id="mPositionPoints" value="12" min="0">
+          </div>
+          <div>
+            <label>Total Match Points Preview</label>
+            <div id="totalPreview" style="font-family:'Orbitron'; font-size:20px; color:var(--gold); padding:8px 0;">12</div>
+          </div>
+        </div>
+        <button id="saveMatch" class="btn">Save Match Result</button>
+      </div>
+
+      <a href="/" class="admin-link">← Back to Homepage</a>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>`;
