@@ -15,4 +15,4 @@ services:
 databases:
   - name: tagfreefiremax-db
     databaseName: tagfreefiremax
-    user: postgres
+    user: tagfreefiremax_user
