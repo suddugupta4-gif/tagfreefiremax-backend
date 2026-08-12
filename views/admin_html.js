@@ -1,10 +1,12 @@
+const styleCss = require('./style_css');
+
 module.exports = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAGFREEFIREMAX - Admin Panel</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <style>${styleCss}</style>
 </head>
 <body>
   <div class="page">
@@ -13,7 +15,6 @@ module.exports = `<!DOCTYPE html>
       <div class="sub">Admin Control Panel</div>
     </div>
 
-    <!-- Login Box -->
     <div id="loginBox" class="glass admin-card" style="max-width:400px; margin:40px auto;">
       <h3>Admin Authentication</h3>
       <label>Password</label>
@@ -21,14 +22,12 @@ module.exports = `<!DOCTYPE html>
       <button id="loginBtn" class="btn">Login</button>
     </div>
 
-    <!-- Admin Body -->
     <div id="adminBody" style="display:none;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
         <h2 style="font-size:16px; color:var(--gold);">Control Dashboard</h2>
         <button id="logoutBtn" class="btn secondary">Logout</button>
       </div>
 
-      <!-- Background Settings -->
       <div class="glass admin-card">
         <h3>Custom Backgrounds</h3>
         <div class="grid2">
@@ -45,7 +44,6 @@ module.exports = `<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Player Management -->
       <div class="glass admin-card">
         <h3>Player Management</h3>
         <div id="playerList" style="margin-bottom:14px;"></div>
@@ -62,7 +60,6 @@ module.exports = `<!DOCTYPE html>
         <button id="savePlayer" class="btn">Save Player Photo</button>
       </div>
 
-      <!-- Tournament Management -->
       <div class="glass admin-card">
         <h3>Create New Tournament</h3>
         <div class="grid2">
@@ -83,7 +80,6 @@ module.exports = `<!DOCTYPE html>
         <button id="createTournament" class="btn">Create Tournament</button>
       </div>
 
-      <!-- Match Results Entry -->
       <div class="glass admin-card">
         <h3>Add Match Result</h3>
         <div id="mTournamentLabel" class="hint" style="color:var(--gold); margin-bottom:10px;"></div>

@@ -1,10 +1,12 @@
+const styleCss = require('./style_css');
+
 module.exports = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAGFREEFIREMAX - Squad Stats & Tournament Tracker</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <style>${styleCss}</style>
 </head>
 <body>
   <div class="page">
@@ -34,7 +36,6 @@ module.exports = `<!DOCTYPE html>
     <a href="/admin" class="admin-link">Admin Panel →</a>
   </div>
 
-  <!-- Past Tournaments Modal -->
   <div id="pastModal" class="modal-backdrop">
     <div class="modal-box glass">
       <span id="closePast" class="close-x">&times;</span>
