@@ -56,6 +56,34 @@ app.use(async (req, res, next) => {
 
 app.use(cors());
 app.use(express.json());
+
+// Embedded view routes to avoid static file bundling issues on Vercel
+const indexHtml = require('./views/index_html');
+const adminHtml = require('./views/admin_html');
+const styleCss = require('./views/style_css');
+const appJs = require('./views/app_js');
+const adminJs = require('./views/admin_js');
+
+app.get('/', (req, res) => {
+  res.type('html').send(indexHtml);
+});
+
+app.get('/admin', (req, res) => {
+  res.type('html').send(adminHtml);
+});
+
+app.get('/css/style.css', (req, res) => {
+  res.type('css').send(styleCss);
+});
+
+app.get('/js/app.js', (req, res) => {
+  res.type('js').send(appJs);
+});
+
+app.get('/js/admin.js', (req, res) => {
+  res.type('js').send(adminJs);
+});
+
 app.use(express.static('public'));
 
 app.use('/api/tournaments', require('./routes/tournaments'));
